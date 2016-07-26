@@ -26,3 +26,21 @@ foreach ($sage_includes as $file) {
   require_once $filepath;
 }
 unset($file, $filepath);
+
+
+add_action( 'init', 'create_posttype' );
+function create_posttype() {
+  register_post_type( 'hot_sauces',
+    array(
+      'labels' => array(
+        'name' => __( 'Hot Sauces' ),
+        'singular_name' => __( 'Hot Sauce' )
+      ),
+      'public' => true,
+      'has_archive' => true,
+      'show_ui' => true,
+      'hierarchical' => true,
+      'rewrite' => array('slug' => 'hot_sauces'),
+    )
+  );
+}
