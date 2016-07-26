@@ -41,6 +41,6 @@ function create_posttype() {
       'show_ui' => true,
       'hierarchical' => true,
       'rewrite' => array('slug' => 'hot_sauces'),
-    )
+    ) 
   );
 }
