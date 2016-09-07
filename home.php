@@ -17,14 +17,13 @@ $query = new WP_Query( $args );
 if ( $query->have_posts() ) :
 
 	while ( $query->have_posts() ) :
-		$query->the_post(); ?>
+		$query->the_post();
+    // only put that div there if there are posts 
+    ?>
 		<div class="col-xs-12 text-center info-container">
-      <!-- <h2><?php echo esc_html($post->post_title); ?></h2>
-      <h4><?php the_content(); ?></h4> -->
+
     </div>
 	<?php endwhile;
-
-	/* Restore original Post Data */
 
 endif;
 ?>
