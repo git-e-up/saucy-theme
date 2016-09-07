@@ -39,8 +39,9 @@ function create_posttype() {
       'public' => true,
       'has_archive' => true,
       'show_ui' => true,
+      'show_in_rest' => true,
       'hierarchical' => true,
       'rewrite' => array('slug' => 'hot_sauces'),
-    ) 
+    )
   );
 }
