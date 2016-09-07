@@ -18,11 +18,11 @@
     // All pages
     'common': {
       init: function() {
-        // JavaScript to be fired on all pages
+        // JavaScript to be fired on all pages/
         var postCount=1;
         function getNextPost(i){
           $.ajax({
-            url: 'wp-json/wp/v2/hot_sauces?per_page=1&page='+postCount,
+            url: 'wp-json/wp/v2/hot_sauces?per_page=1&filter[orderby]=date&order=asc&page='+postCount,
             success: function(response) {
               console.log(response);
 
@@ -37,61 +37,16 @@
             }
           });
         }
+        // if .info-container exists (which will only happen after php puts it there), get the first post on initial load
+        if( $('.info-container').length > 0){
+            getNextPost(postCount);
+        }
 
         $('.info-container').click(function(){
           getNextPost(postCount);
+          console.log(postCount);
         });
 
-        /*
-        $('.info-container').click(function(){
-
-          $.ajax({
-            url: 'wp-json/wp/v2/hot_sauces?per_page=1&page='+postCount,
-            success: function(response) {
-              if()
-              console.log(response);
-
-              // $.each(response,function(index,post){
-              //   $('.info-container').html('<h2>'+post.title.rendered+'</h2><h4>' + post.content.rendered)+ '</h4>';
-              //   console.log(post);
-              // });
-
-              var arNum = response.length;
-              var i=0;
-              $('.info-container').html(response);
-              // $('.info-container').html('<h2>'+response[i].title.rendered+'</h2><h4>' + response[i].content.rendered)+ '</h4>';
-
-
-              // while (i > arNum) {
-              //   i++
-              // }
-
-
-              // for (var i = 0; i < arNum; i++) {
-              //   // if (i > arNum) {
-              //     i =-1;
-              //   // }
-              // }
-
-              console.log(i);
-
-
-
-              // for (var i = 0; i < arNum; i++) {
-              //   console.log(i);
-              //   $('.info-container').html('<h2>'+response[i].title.rendered+'</h2><h4>' + response[i].content.rendered)+ '</h4>';
-              // }
-
-              // console.log(response[0].title, response[0].content);
-
-
-
-              // console.log(response.length);
-              // console.log(response.order);
-            }
-          })
-        })
-        */
       },
       finalize: function() {
         // JavaScript to be fired on all pages, after page specific JS is fired
