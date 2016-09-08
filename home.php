@@ -18,11 +18,14 @@ if ( $query->have_posts() ) :
 
 	while ( $query->have_posts() ) :
 		$query->the_post();
-    // only put that div there if there are posts 
+    // only put that div there if there are posts
     ?>
-		<div class="col-xs-12 text-center info-container">
+    <ul class="side-nav">
 
-    </div>
+    </ul>
+		<section class="col-xs-12 text-center info-container">
+
+    </section>
 	<?php endwhile;
 
 endif;

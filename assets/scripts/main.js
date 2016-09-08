@@ -18,13 +18,24 @@
     // All pages
     'common': {
       init: function() {
+
+        $.ajax({
+          url: 'wp-json/wp/v2/hot_sauces',
+          success: function(response) {
+
+            $.each(response,function(index, el){
+              $('.side-nav').append('<li>' + el.title.rendered + '</li>')
+            });
+            // $('.side-nav').html()
+          }
+        })
         // JavaScript to be fired on all pages/
         var postCount=1;
         function getNextPost(i){
           $.ajax({
             url: 'wp-json/wp/v2/hot_sauces?per_page=1&filter[orderby]=date&order=asc&page='+postCount,
             success: function(response) {
-              console.log(response);
+              // console.log(response);
 
               if(response.length === 1){
 
@@ -44,7 +55,7 @@
 
         $('.info-container').click(function(){
           getNextPost(postCount);
-          console.log(postCount);
+          // console.log(postCount);
         });
 
       },
