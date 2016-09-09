@@ -22,14 +22,15 @@
         $.ajax({
           url: 'wp-json/wp/v2/hot_sauces',
           success: function(response) {
-
             $.each(response,function(index, el){
-              $('.side-nav').append('<li>' + el.title.rendered + '</li>')
+              $('.side-nav').append('<li data-slug="'+el.slug+'">' + el.title.rendered + '</li>');
             });
-            // $('.side-nav').html()
           }
-        })
-        // JavaScript to be fired on all pages/
+        });
+
+
+
+
         var postCount=1;
         function getNextPost(i){
           $.ajax({
@@ -38,8 +39,10 @@
               // console.log(response);
 
               if(response.length === 1){
+                $('.info-container').attr('data-slug', response[0].slug);
 
-                $('.info-container').html('<h2>'+response[0].title.rendered+'</h2><h4>' + response[0].content.rendered)+ '</h4>';
+                // console.log(response[0].slug);
+                $('.info-container').html('<h2>'+response[0].title.rendered+'</h2><h4>' + response[0].content.rendered+ '</h4>');
                 postCount++;
               }else{
                 postCount=1;
@@ -48,6 +51,7 @@
             }
           });
         }
+
         // if .info-container exists (which will only happen after php puts it there), get the first post on initial load
         if( $('.info-container').length > 0){
             getNextPost(postCount);
@@ -55,7 +59,20 @@
 
         $('.info-container').click(function(){
           getNextPost(postCount);
-          // console.log(postCount);
+        });
+
+        $(document).on('click', '.side-nav li', function(e){
+          var slug = $(this).data('slug');
+          $.ajax({
+            url: 'wp-json/wp/v2/hot_sauces',
+            success: function(response) {
+              $.each(response,function(index, el){
+                if (slug == el.slug){
+                  $('.info-container').html('<h2>'+el.title.rendered+'</h2><h4>' + el.content.rendered+ '</h4>');
+                }
+              });
+            }
+          });
         });
 
       },
