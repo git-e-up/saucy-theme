@@ -20,19 +20,25 @@
       init: function() {
 
         $.ajax({
-          url: 'wp-json/wp/v2/hot_sauces',
+          url: 'wp-json/wp/v2/hot_sauces?filter[orderby]=date&order=asc',
           success: function(response) {
             $.each(response,function(index, el){
-              $('.side-nav').append('<li data-slug="'+el.slug+'">' + el.title.rendered + '</li>');
+
+              $('.side-nav').append('<li data-slug="'+el.slug+'" data-postIndex="'+parseInt(response.indexOf(el)+2)+'">' + el.title.rendered + '</li>');
+              // $('li').attr('data-postIndex', response.indexOf(el));
             });
           }
         });
 
 
-
-
         var postCount=1;
+        $(document).on('click', '.side-nav li', function(){
+          postCount = $(this).attr('data-postIndex');
+          // console.log(postCount);
+        });
+
         function getNextPost(i){
+          // console.log(postCount);
           $.ajax({
             url: 'wp-json/wp/v2/hot_sauces?per_page=1&filter[orderby]=date&order=asc&page='+postCount,
             success: function(response) {
@@ -52,9 +58,11 @@
           });
         }
 
+
         // if .info-container exists (which will only happen after php puts it there), get the first post on initial load
         if( $('.info-container').length > 0){
             getNextPost(postCount);
+            $('.info-container').attr('data-postIndex', '0');
         }
 
         $('.info-container').click(function(){
@@ -63,17 +71,23 @@
 
         $(document).on('click', '.side-nav li', function(e){
           var slug = $(this).data('slug');
+          // console.log(postCount);
           $.ajax({
             url: 'wp-json/wp/v2/hot_sauces',
             success: function(response) {
+              // console.log(response);
               $.each(response,function(index, el){
+                // response.reverse();
                 if (slug == el.slug){
+
+                  // $('.info-container').attr('data-postIndex', response.indexOf(el));
                   $('.info-container').html('<h2>'+el.title.rendered+'</h2><h4>' + el.content.rendered+ '</h4>');
                 }
               });
             }
           });
         });
+
 
       },
       finalize: function() {
