@@ -75,13 +75,17 @@
           $.ajax({
             url: 'wp-json/wp/v2/hot_sauces',
             success: function(response) {
-              // console.log(response);
               $.each(response,function(index, el){
-                // response.reverse();
                 if (slug == el.slug){
+                  if( JSON.parse( el.repeatable_autocomplete ) ){
+                      var repeatables = JSON.parse( el.repeatable_autocomplete )
+                  };
 
-                  // $('.info-container').attr('data-postIndex', response.indexOf(el));
-                  $('.info-container').html('<h2>'+el.title.rendered+'</h2><h4>' + el.content.rendered+ '</h4>');
+                  $('.info-container').html('<h2>'+el.title.rendered+'</h2><h4>' + el.content.rendered+ '</h4>' + '<ul></ul>');
+
+                  $.each(repeatables, function(index,el){
+                    $('.info-container > ul').append( '<li>' + el.post_title + '</li>')
+                  });
                 }
               });
             }
