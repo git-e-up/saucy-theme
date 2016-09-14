@@ -24,7 +24,7 @@ if ( $query->have_posts() ) :
 
     </ul>
 		<section class="col-xs-12 text-center info-container">
-
+			
     </section>
 	<?php endwhile;
 

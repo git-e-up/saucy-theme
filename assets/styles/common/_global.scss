@@ -5,3 +5,25 @@ body {
 .info-container {
   border: 1px solid lightblue;
 }
+.left-arrow {
+  position: absolute;
+  left: 5px;
+  top: 10px;
+  // bottom: 0;
+  // margin: auto;
+  font-size: 24px;
+  height: 40px;
+  line-height: 40px;
+  z-index: 10;
+}
+.right-arrow {
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  // bottom: 0;
+  // margin: auto;
+  font-size: 24px;
+  height: 40px;
+  line-height: 40px;
+  z-index: 10;
+}

@@ -32,10 +32,46 @@
 
 
         var postCount=1;
+
         $(document).on('click', '.side-nav li', function(){
           postCount = $(this).attr('data-postIndex');
           // console.log(postCount);
         });
+
+        function getAPost(i){
+          // console.log(postCount);
+          $.ajax({
+            url: 'wp-json/wp/v2/hot_sauces?per_page=1&filter[orderby]=date&order=asc&page='+postCount,
+            success: function(response) {
+              // console.log(response);
+
+              if(response.length === 1){
+                if( JSON.parse( response[0].repeatable_autocomplete ) ){
+                    var repeatables = JSON.parse( response[0].repeatable_autocomplete );
+                    // console.log(repeatables);
+                };
+
+                $('.info-container').attr('data-slug', response[0].slug);
+
+                // console.log(response[0].slug);
+                $('.info-container').html('<span class="left-arrow"><</span><span class="right-arrow">></span><h2>'+response[0].title.rendered+'</h2><h4>' + response[0].content.rendered+ '</h4>'+ '<ul></ul>');
+
+                $.each(repeatables, function(index,el){
+                  // console.log(el['post_name']);
+                  $('.info-container > ul').append( '<li><h3>' + el.post_title + '</h3><p>'+el.post_content+'</p></li>');
+                  // console.log(el);
+                  $('.info-container').on('click', 'li', function(){
+                    alert('yo');
+                  })
+                });
+
+              }else{
+                postCount=1;
+                getNextPost(postCount);
+              }
+            }
+          });
+        }
 
         function getNextPost(i){
           // console.log(postCount);
@@ -53,11 +89,15 @@
                 $('.info-container').attr('data-slug', response[0].slug);
 
                 // console.log(response[0].slug);
-                $('.info-container').html('<h2>'+response[0].title.rendered+'</h2><h4>' + response[0].content.rendered+ '</h4>'+ '<ul></ul>');
+                $('.info-container').html('<span class="left-arrow"><</span><span class="right-arrow">></span><h2>'+response[0].title.rendered+'</h2><h4>' + response[0].content.rendered+ '</h4>'+ '<ul></ul>');
 
                 $.each(repeatables, function(index,el){
                   // console.log(el['post_name']);
-                  $('.info-container > ul').append( '<li>' + el.post_title + '</li>')
+                  $('.info-container > ul').append( '<li><h3>' + el.post_title + '</h3><p>'+el.post_content+'</p></li>');
+                  // console.log(el);
+                  $('.info-container').on('click', 'li', function(){
+                    alert('yo');
+                  })
                 });
                 postCount++;
               }else{
@@ -68,15 +108,67 @@
           });
         }
 
+        function getPreviousPost(i){
+          // console.log(postCount);
+          $.ajax({
+            url: 'wp-json/wp/v2/hot_sauces?per_page=1&filter[orderby]=date&order=asc&page='+(postCount),
+            success: function(response) {
+              // console.log(response.length);
+
+              if(response.length === 1){
+
+                if( JSON.parse( response[0].repeatable_autocomplete ) ){
+                    var repeatables = JSON.parse( response[0].repeatable_autocomplete );
+                    // console.log(repeatables);
+                };
+
+
+                $('.info-container').attr('data-slug', response[0].slug);
+
+                // console.log(response[0].slug);
+                $('.info-container').html('<span class="left-arrow"><</span><span class="right-arrow">></span><h2>'+response[0].title.rendered+'</h2><h4>' + response[0].content.rendered+ '</h4>'+ '<ul></ul>');
+
+                $.each(repeatables, function(index,el){
+                  // console.log(el['post_name']);
+                  $('.info-container > ul').append( '<li><h3>' + el.post_title + '</h3><p>'+el.post_content+'</p></li>');
+                  // console.log(el);
+                  $('.info-container').on('click', 'li', function(){
+                    alert('yo');
+                  })
+                });
+                postCount--;
+              }else{
+                postCount=1;
+                getPreviousPost(postCount);
+                console.log('else');
+
+              }
+            },
+            error: function () {
+              postCount=5;
+              getPreviousPost(postCount);
+                  console.log('error');
+            }
+          });
+        }
+
 
         // if .info-container exists (which will only happen after php puts it there), get the first post on initial load
         if( $('.info-container').length > 0){
-            getNextPost(postCount);
+            getAPost(postCount);
+            // getNextPost(postCount);
+            // getPreviousPost(postCount);
             $('.info-container').attr('data-postIndex', '0');
         }
 
-        $('.info-container').click(function(){
+        $('.info-container').on('click', '.right-arrow', function(){
           getNextPost(postCount);
+          // console.log(postCount);
+        });
+
+        $('.info-container').on('click', '.left-arrow', function(){
+          getPreviousPost(postCount);
+          // console.log(postCount);
         });
 
         $(document).on('click', '.side-nav li', function(e){
@@ -91,7 +183,7 @@
                       var repeatables = JSON.parse( el.repeatable_autocomplete )
                   };
 
-                  $('.info-container').html('<h2>'+el.title.rendered+'</h2><h4>' + el.content.rendered+ '</h4>' + '<ul></ul>');
+                  $('.info-container').html('<span class="right-arrow">></span><h2>'+el.title.rendered+'</h2><h4>' + el.content.rendered+ '</h4>' + '<ul></ul>');
 
                   $.each(repeatables, function(index,el){
                     $('.info-container > ul').append( '<li>' + el.post_title + '</li>')
@@ -102,7 +194,9 @@
           });
         });
 
-
+        $(window).click(function(){
+          console.log(postCount);
+        })
       },
       finalize: function() {
         // JavaScript to be fired on all pages, after page specific JS is fired
