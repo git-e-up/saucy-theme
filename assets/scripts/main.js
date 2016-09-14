@@ -45,10 +45,20 @@
               // console.log(response);
 
               if(response.length === 1){
+                if( JSON.parse( response[0].repeatable_autocomplete ) ){
+                    var repeatables = JSON.parse( response[0].repeatable_autocomplete );
+                    // console.log(repeatables);
+                };
+
                 $('.info-container').attr('data-slug', response[0].slug);
 
                 // console.log(response[0].slug);
-                $('.info-container').html('<h2>'+response[0].title.rendered+'</h2><h4>' + response[0].content.rendered+ '</h4>');
+                $('.info-container').html('<h2>'+response[0].title.rendered+'</h2><h4>' + response[0].content.rendered+ '</h4>'+ '<ul></ul>');
+
+                $.each(repeatables, function(index,el){
+                  // console.log(el['post_name']);
+                  $('.info-container > ul').append( '<li>' + el.post_title + '</li>')
+                });
                 postCount++;
               }else{
                 postCount=1;
