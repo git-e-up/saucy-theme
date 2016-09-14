@@ -38,41 +38,6 @@
           // console.log(postCount);
         });
 
-        function getAPost(i){
-          // console.log(postCount);
-          $.ajax({
-            url: 'wp-json/wp/v2/hot_sauces?per_page=1&filter[orderby]=date&order=asc&page='+postCount,
-            success: function(response) {
-              // console.log(response);
-
-              if(response.length === 1){
-                if( JSON.parse( response[0].repeatable_autocomplete ) ){
-                    var repeatables = JSON.parse( response[0].repeatable_autocomplete );
-                    // console.log(repeatables);
-                };
-
-                $('.info-container').attr('data-slug', response[0].slug);
-
-                // console.log(response[0].slug);
-                $('.info-container').html('<span class="left-arrow"><</span><span class="right-arrow">></span><h2>'+response[0].title.rendered+'</h2><h4>' + response[0].content.rendered+ '</h4>'+ '<ul></ul>');
-
-                $.each(repeatables, function(index,el){
-                  // console.log(el['post_name']);
-                  $('.info-container > ul').append( '<li><h3>' + el.post_title + '</h3><p>'+el.post_content+'</p></li>');
-                  // console.log(el);
-                  $('.info-container').on('click', 'li', function(){
-                    alert('yo');
-                  })
-                });
-
-              }else{
-                postCount=1;
-                getNextPost(postCount);
-              }
-            }
-          });
-        }
-
         function getNextPost(i){
           // console.log(postCount);
           $.ajax({
@@ -108,56 +73,12 @@
           });
         }
 
-        function getPreviousPost(i){
-          // console.log(postCount);
-          $.ajax({
-            url: 'wp-json/wp/v2/hot_sauces?per_page=1&filter[orderby]=date&order=asc&page='+(postCount),
-            success: function(response) {
-              // console.log(response.length);
-
-              if(response.length === 1){
-
-                if( JSON.parse( response[0].repeatable_autocomplete ) ){
-                    var repeatables = JSON.parse( response[0].repeatable_autocomplete );
-                    // console.log(repeatables);
-                };
-
-
-                $('.info-container').attr('data-slug', response[0].slug);
-
-                // console.log(response[0].slug);
-                $('.info-container').html('<span class="left-arrow"><</span><span class="right-arrow">></span><h2>'+response[0].title.rendered+'</h2><h4>' + response[0].content.rendered+ '</h4>'+ '<ul></ul>');
-
-                $.each(repeatables, function(index,el){
-                  // console.log(el['post_name']);
-                  $('.info-container > ul').append( '<li><h3>' + el.post_title + '</h3><p>'+el.post_content+'</p></li>');
-                  // console.log(el);
-                  $('.info-container').on('click', 'li', function(){
-                    alert('yo');
-                  })
-                });
-                postCount--;
-              }else{
-                postCount=1;
-                getPreviousPost(postCount);
-                console.log('else');
-
-              }
-            },
-            error: function () {
-              postCount=5;
-              getPreviousPost(postCount);
-                  console.log('error');
-            }
-          });
-        }
 
 
         // if .info-container exists (which will only happen after php puts it there), get the first post on initial load
         if( $('.info-container').length > 0){
-            getAPost(postCount);
-            // getNextPost(postCount);
-            // getPreviousPost(postCount);
+            getNextPost(postCount);
+
             $('.info-container').attr('data-postIndex', '0');
         }
 
@@ -167,7 +88,13 @@
         });
 
         $('.info-container').on('click', '.left-arrow', function(){
-          getPreviousPost(postCount);
+          postCount = postCount-1;
+          postCount--;
+          if (postCount <= 0) {
+            // console.log('one');
+            postCount = 5;
+          }
+          getNextPost(postCount);
           // console.log(postCount);
         });
 
