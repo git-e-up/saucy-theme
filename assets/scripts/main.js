@@ -90,9 +90,10 @@
         $('.info-container').on('click', '.left-arrow', function(){
           postCount = postCount-1;
           postCount--;
+
           if (postCount <= 0) {
-            // console.log('one');
-            postCount = 5;
+
+            postCount = $('.side-nav li').length;
           }
           getNextPost(postCount);
           // console.log(postCount);
