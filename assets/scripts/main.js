@@ -58,11 +58,11 @@
 
                 $.each(repeatables, function(index,el){
                   // console.log(el['post_name']);
-                  $('.info-container > ul').append( '<li><h3>' + el.post_title + '</h3><p>'+el.post_content+'</p></li>');
+                  $('.info-container > ul').append( "<li><h4 class='popup-title'>" + el.post_title + "</h4><section class='popup'>"+el.post_content+"</section></li>");
                   // console.log(el);
-                  $('.info-container').on('click', 'li', function(){
-                    alert('yo');
-                  })
+                  // $('.info-container').on('click', 'li', function(){
+                  //   alert('yo');
+                  // })
                 });
                 postCount++;
               }else{
@@ -111,10 +111,10 @@
                       var repeatables = JSON.parse( el.repeatable_autocomplete )
                   };
 
-                  $('.info-container').html('<span class="right-arrow">></span><h2>'+el.title.rendered+'</h2><h4>' + el.content.rendered+ '</h4>' + '<ul></ul>');
+                  $('.info-container').html('<span class="left-arrow"><</span><span class="right-arrow">></span><h2>'+el.title.rendered+'</h2><h4>' + el.content.rendered+ '</h4>' + '<ul></ul>');
 
                   $.each(repeatables, function(index,el){
-                    $('.info-container > ul').append( '<li>' + el.post_title + '</li>')
+                    $('.info-container > ul').append( "<li><h4 class='popup-title'>" + el.post_title + "</h4><section class='popup'>"+el.post_content+"</section></li>")
                   });
                 }
               });
@@ -122,9 +122,13 @@
           });
         });
 
-        $(window).click(function(){
-          console.log(postCount);
-        })
+        $('body').on('click', '.popup-title', function() {
+          $(this).siblings('.popup').toggleClass('show-popup');
+        });
+
+        // $(window).click(function(){
+        //   console.log(postCount);
+        // })
       },
       finalize: function() {
         // JavaScript to be fired on all pages, after page specific JS is fired
