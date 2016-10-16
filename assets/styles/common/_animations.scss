@@ -1,0 +1,63 @@
+// .bounce {
+//   animation: bounce 1s ease;
+// }
+
+@keyframes bounce {
+  5%{
+    transform:translateY(-40%);
+  }
+  15% {
+    transform:translateY(-20%);
+    // padding-bottom: 5px;
+  }
+  25% {
+    transform:translateY(0%);
+  }
+  35% {
+    transform:translateY(-30%);
+  }
+  50% {
+    transform:translateY(-15%);
+  }
+  70% {
+      transform:translateY(0%);
+      // padding-bottom: 7px;
+  }
+  80% {
+    transform:translateY(-15%);
+  }
+  90% {
+    transform:translateY(0%);
+    // padding-bottom: 8px;
+  }
+  95% {
+    transform:translateY(-7%);
+  }
+  97% {
+    transform:translateY(0%);
+    // padding-bottom: 9px;
+  }
+  99% {
+    transform:translateY(-3%);
+  }
+  100% {
+    transform:translateY(0);
+    // padding-bottom: 9px;
+    opacity: 1;
+  }
+}
+
+@keyframes slidein {
+  from {
+    margin-left: 0%;
+    width: 100%;
+    opacity: 1;
+  }
+
+  to {
+    margin-left: 100%;
+    width: 100%;
+    opacity: 0;
+    max-height: 50px;
+  }
+}

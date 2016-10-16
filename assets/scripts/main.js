@@ -126,6 +126,8 @@
           $(this).siblings('.popup').toggleClass('show-popup');
         });
 
+        
+
         // $(window).click(function(){
         //   console.log(postCount);
         // })
