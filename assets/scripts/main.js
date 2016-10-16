@@ -106,7 +106,7 @@
         $(document).on('click', '.side-nav li', function(e){
           var slug = $(this).data('slug');
           // console.log(postCount);
-          $('.info-container').removeClass('bouncing');
+          $('.info-container').removeClass('sliding');
           $.ajax({
             url: 'wp-json/wp/v2/hot_sauces',
             success: function(response) {
@@ -116,7 +116,7 @@
                       var repeatables = JSON.parse( el.repeatable_autocomplete )
                   };
 
-                  $('.info-container').addClass('bouncing');
+                  $('.info-container').addClass('sliding');
 
                   setTimeout(function(){
                     $('.info-container').html('<span class="left-arrow"><</span><span class="right-arrow">></span><h2>'+el.title.rendered+'</h2><h4>' + el.content.rendered+ '</h4>' + '<ul></ul>');

@@ -1,6 +1,9 @@
-// .bounce {
-//   animation: bounce 1s ease;
-// }
+.bouncing {
+  animation: bounce 1s 2;
+  animation-delay: 0.6s;
+  animation-direction: alternate;
+  background-color: lightblue;
+}
 
 @keyframes bounce {
   5%{
