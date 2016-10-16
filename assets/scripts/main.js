@@ -18,6 +18,7 @@
     // All pages
     'common': {
       init: function() {
+        // $('.side-nav li').addClass('bouncing');
 
         $.ajax({
           url: 'wp-json/wp/v2/hot_sauces?filter[orderby]=date&order=asc',
@@ -25,6 +26,9 @@
             $.each(response,function(index, el){
 
               $('.side-nav').append('<li data-slug="'+el.slug+'" data-postIndex="'+parseInt(response.indexOf(el)+2)+'">' + el.title.rendered + '</li>');
+
+              //add bouncing on init load
+              $('.side-nav li:first-of-type').addClass('bouncing');
               // $('li').attr('data-postIndex', response.indexOf(el));
             });
           }
@@ -37,18 +41,25 @@
           postCount = $(this).attr('data-postIndex');
           $('.side-nav li').removeClass('bouncing');
           $(this).addClass('bouncing');
+          $('.info-container').removeClass('sliding-up, sliding-right');
 
           // $('h2').addClass('bouncing');
           // console.log(postCount);
         });
 
         function getNextPost(i){
-          // console.log(postCount);
+          console.log(postCount);
+
+          $('.side-nav li').removeClass('bouncing');
+          $('.side-nav li:nth-of-type('+postCount+')').addClass('bouncing');
           $.ajax({
             url: 'wp-json/wp/v2/hot_sauces?per_page=1&filter[orderby]=date&order=asc&page='+postCount,
             success: function(response) {
-              // console.log(response);
 
+
+              // console.log(response);
+              // $('.righty').addClass('sliding-right');
+              // $('.lefty').addClass('sliding-left');
               if(response.length === 1){
                 if( JSON.parse( response[0].repeatable_autocomplete ) ){
                     var repeatables = JSON.parse( response[0].repeatable_autocomplete );
@@ -58,16 +69,20 @@
                 $('.info-container').attr('data-slug', response[0].slug);
 
                 // console.log(response[0].slug);
-                $('.info-container').html('<span class="left-arrow"><</span><span class="right-arrow">></span><h2>'+response[0].title.rendered+'</h2><h4>' + response[0].content.rendered+ '</h4>'+ '<ul></ul>');
 
-                $.each(repeatables, function(index,el){
-                  // console.log(el['post_name']);
-                  $('.info-container > ul').append( "<li><h4 class='popup-title'>" + el.post_title + "</h4><section class='popup'>"+el.post_content+"</section></li>");
-                  // console.log(el);
-                  // $('.info-container').on('click', 'li', function(){
-                  //   alert('yo');
-                  // })
-                });
+
+                setTimeout(function(){
+                  $('.info-container').html('<span class="left-arrow"><</span><span class="right-arrow">></span><h2>'+response[0].title.rendered+'</h2><h4>' + response[0].content.rendered+ '</h4>'+ '<ul></ul>');
+
+                  $.each(repeatables, function(index,el){
+                    // console.log(el['post_name']);
+                    $('.info-container > ul').append( "<li><h4 class='popup-title'>" + el.post_title + "</h4><section class='popup'>"+el.post_content+"</section></li>");
+                    // console.log(el);
+                    // $('.info-container').on('click', 'li', function(){
+                    //   alert('yo');
+                    // })
+                  });
+                }, 1500);
                 postCount++;
               }else{
                 postCount=1;
@@ -83,15 +98,20 @@
         if( $('.info-container').length > 0){
             getNextPost(postCount);
 
-            $('.info-container').attr('data-postIndex', '0');
+            $('.info-container').attr('data-postIndex', '0').addClass('sliding-up');
         }
 
         $('.info-container').on('click', '.right-arrow', function(){
+          $('.info-container').addClass('sliding-right').removeClass('sliding-left, sliding-up');
           getNextPost(postCount);
           // console.log(postCount);
+          setTimeout(function(){
+            $('.info-container').removeClass('sliding-right');
+          }, 3000);
         });
 
         $('.info-container').on('click', '.left-arrow', function(){
+          $('.info-container').addClass('sliding-left').removeClass('sliding-right, sliding-up');
           postCount = postCount-1;
           postCount--;
 
@@ -101,12 +121,15 @@
           }
           getNextPost(postCount);
           // console.log(postCount);
+          setTimeout(function(){
+            $('.info-container').removeClass('sliding-left');
+          }, 3000);
         });
 
         $(document).on('click', '.side-nav li', function(e){
           var slug = $(this).data('slug');
           // console.log(postCount);
-          $('.info-container').removeClass('sliding');
+          $('.info-container').removeClass('sliding-right');
           $.ajax({
             url: 'wp-json/wp/v2/hot_sauces',
             success: function(response) {
@@ -116,7 +139,7 @@
                       var repeatables = JSON.parse( el.repeatable_autocomplete )
                   };
 
-                  $('.info-container').addClass('sliding');
+                  $('.info-container').addClass('sliding-right');
 
                   setTimeout(function(){
                     $('.info-container').html('<span class="left-arrow"><</span><span class="right-arrow">></span><h2>'+el.title.rendered+'</h2><h4>' + el.content.rendered+ '</h4>' + '<ul></ul>');
@@ -136,6 +159,9 @@
         $('body').on('click', '.popup-title', function() {
           $(this).siblings('.popup').toggleClass('show-popup');
         });
+        // window.onload = function() {
+        //   $('.side-nav li:first-of-type').addClass('bouncing');
+        // };
 
 
 
