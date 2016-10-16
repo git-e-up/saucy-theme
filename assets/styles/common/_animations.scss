@@ -47,6 +47,12 @@
   }
 }
 
+
+.sliding {
+  animation: slidein 1s 2;
+  animation-delay: 0.6s;
+  animation-direction: alternate;
+}
 @keyframes slidein {
   from {
     margin-left: 0%;
@@ -57,7 +63,8 @@
   to {
     margin-left: 100%;
     width: 100%;
-    opacity: 0;
-    max-height: 50px;
+    // opacity: 0;
+    // max-height: 50px;
+    background-color: red;
   }
 }

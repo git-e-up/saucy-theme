@@ -35,6 +35,10 @@
 
         $(document).on('click', '.side-nav li', function(){
           postCount = $(this).attr('data-postIndex');
+          $('.side-nav li').removeClass('bouncing');
+          $(this).addClass('bouncing');
+
+          // $('h2').addClass('bouncing');
           // console.log(postCount);
         });
 
@@ -102,6 +106,7 @@
         $(document).on('click', '.side-nav li', function(e){
           var slug = $(this).data('slug');
           // console.log(postCount);
+          $('.info-container').removeClass('bouncing');
           $.ajax({
             url: 'wp-json/wp/v2/hot_sauces',
             success: function(response) {
@@ -111,11 +116,17 @@
                       var repeatables = JSON.parse( el.repeatable_autocomplete )
                   };
 
-                  $('.info-container').html('<span class="left-arrow"><</span><span class="right-arrow">></span><h2>'+el.title.rendered+'</h2><h4>' + el.content.rendered+ '</h4>' + '<ul></ul>');
+                  $('.info-container').addClass('bouncing');
 
-                  $.each(repeatables, function(index,el){
-                    $('.info-container > ul').append( "<li><h4 class='popup-title'>" + el.post_title + "</h4><section class='popup'>"+el.post_content+"</section></li>")
-                  });
+                  setTimeout(function(){
+                    $('.info-container').html('<span class="left-arrow"><</span><span class="right-arrow">></span><h2>'+el.title.rendered+'</h2><h4>' + el.content.rendered+ '</h4>' + '<ul></ul>');
+
+                    $.each(repeatables, function(index,el){
+                      $('.info-container > ul').append( "<li><h4 class='popup-title'>" + el.post_title + "</h4><section class='popup'>"+el.post_content+"</section></li>")
+                    });
+
+
+                  },1500);
                 }
               });
             }
@@ -126,7 +137,7 @@
           $(this).siblings('.popup').toggleClass('show-popup');
         });
 
-        
+
 
         // $(window).click(function(){
         //   console.log(postCount);
