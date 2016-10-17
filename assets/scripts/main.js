@@ -48,7 +48,7 @@
         });
 
         function getNextPost(i){
-          console.log(postCount);
+          // console.log(postCount);
 
           $('.side-nav li').removeClass('bouncing');
           $('.side-nav li:nth-of-type('+postCount+')').addClass('bouncing');
@@ -129,7 +129,7 @@
         $(document).on('click', '.side-nav li', function(e){
           var slug = $(this).data('slug');
           // console.log(postCount);
-          $('.info-container').removeClass('sliding-right');
+          $('.info-container').removeClass('sliding-right, sliding-up');
           $.ajax({
             url: 'wp-json/wp/v2/hot_sauces',
             success: function(response) {
@@ -139,7 +139,7 @@
                       var repeatables = JSON.parse( el.repeatable_autocomplete )
                   };
 
-                  $('.info-container').addClass('sliding-right');
+                  $('.info-container').addClass('sliding-up');
 
                   setTimeout(function(){
                     $('.info-container').html('<span class="left-arrow"><</span><span class="right-arrow">></span><h2>'+el.title.rendered+'</h2><h4>' + el.content.rendered+ '</h4>' + '<ul></ul>');
