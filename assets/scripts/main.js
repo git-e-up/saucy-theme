@@ -72,7 +72,7 @@
 
 
                 setTimeout(function(){
-                  $('.info-container').html('<span class="left-arrow"><</span><span class="right-arrow">></span><h2>'+response[0].title.rendered+'</h2><h4>' + response[0].content.rendered+ '</h4>'+ '<ul></ul>');
+                  $('.info-container').html('<span class="left-arrow"></span><span class="right-arrow"></span><h2>'+response[0].title.rendered+'</h2><h4>' + response[0].content.rendered+ '</h4>'+ '<ul></ul>');
 
                   $.each(repeatables, function(index,el){
                     // console.log(el['post_name']);
@@ -142,9 +142,10 @@
                   $('.info-container').addClass('sliding-up');
 
                   setTimeout(function(){
-                    $('.info-container').html('<span class="left-arrow"><</span><span class="right-arrow">></span><h2>'+el.title.rendered+'</h2><h4>' + el.content.rendered+ '</h4>' + '<ul></ul>');
+                    $('.info-container').html('<span class="left-arrow"></span><span class="right-arrow"></span><h2>'+el.title.rendered+'</h2><h4>' + el.content.rendered+ '</h4>' + '<ul></ul>');
 
                     $.each(repeatables, function(index,el){
+                      console.log(el);
                       $('.info-container > ul').append( "<li><h4 class='popup-title'>" + el.post_title + "</h4><section class='popup'>"+el.post_content+"</section></li>")
                     });
 

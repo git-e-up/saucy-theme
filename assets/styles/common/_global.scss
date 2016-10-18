@@ -1,33 +1,100 @@
 
 body {
-  // background: red;
+  background: #f3f2ed;
 }
 .info-container {
-  border: 3px solid lightblue;
+  border: 4px double #000;
+  box-shadow: 3px 3px 5px #888888;
+  background-color: white;
 }
-.left-arrow {
-  position: absolute;
-  left: 5px;
-  top: 10px;
-  // bottom: 0;
-  // margin: auto;
-  font-size: 24px;
-  height: 40px;
-  line-height: 40px;
-  z-index: 10;
-  cursor: pointer;
-}
+
 .right-arrow {
   position: absolute;
   right: 5px;
   top: 10px;
   // bottom: 0;
   // margin: auto;
-  font-size: 24px;
-  height: 40px;
-  line-height: 40px;
-  z-index: 10;
+  // font-size: 24px;
+  // height: 40px;
+  // line-height: 40px;
+  // z-index: 10;
   cursor: pointer;
+
+  overflow: hidden;
+  // background: black;
+  height: 45px;
+  width: 45px;
+  @media(max-width: $screen-xs-max) {
+    transform: scale(0.6);
+    top: 0;
+    bottom: 0;
+    margin: auto;
+  }
+  &:before {
+    // right: 35%;
+    top: 50%;
+    border: solid transparent;
+    border-radius: 15px;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(194, 225, 245, 0);
+  	border-left-color: black;
+    border-right-color: white;
+  	border-width: 20px;
+  	margin-top: -20px;
+    opacity: 1;
+  }
+  &:after {
+
+    // right: 35%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(136, 183, 213, 0);
+  	border-left-color: white;
+    border-right-color: transparent;
+  	border-width: 15px;
+  	margin-top: -15px;
+  }
+
+}
+
+.left-arrow {
+  @extend .right-arrow;
+  position: absolute;
+  left: 5px;
+  top: 10px;
+  transform: rotate(180deg);
+  // bottom: 0;
+  // margin: auto;
+  // font-size: 24px;
+  // height: 40px;
+  // line-height: 40px;
+  // z-index: 10;
+  // cursor: pointer;
+  &:before{
+
+
+    border-right-color: white;
+    border-left-color: black;
+
+
+    // left: 0;
+  }
+  &:after{
+    border-left-color: white;
+    border-right-color: transparent;
+
+
+    // left:0;
+  }
 }
 
 .popup {

@@ -5,9 +5,9 @@ use Roots\Sage\Extras;
 
 add_action( 'fm_post_post', function() {
   $fm = new \Fieldmanager_Media( array(
-    'name' => 'slideshow',
+    'name' => 'demo-media',
   ) );
-  $fm->add_meta_box('post image', 'post');
+  $fm->add_meta_box('Media Field', array( 'post' ));
 } );
 
 
@@ -101,7 +101,9 @@ function slug_get_hot_posts( $object, $field_name, $request ) {
 
     $hot_post_ids = $tmpPosts->flatPosts;
 
+
     $hot_posts = get_posts(array( 'post__in' => $hot_post_ids ) );
+
 
     return json_encode( $hot_posts );
 

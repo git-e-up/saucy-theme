@@ -2,7 +2,8 @@
   animation: bounce 1s;
   animation-delay: 0.6s;
   // animation-direction: alternate;
-  background-color: lightblue;
+  background-color: #607D8B;
+  color: white;
 }
 
 @keyframes bounce {
@@ -55,6 +56,12 @@
   animation: slidein-right 1s 2;
   animation-delay: 0.6s;
   animation-direction: alternate;
+  .left-arrow:after, .right-arrow:after {
+    border-color: transparent;
+  }
+  .left-arrow:before, .right-arrow:before {
+    border-color: transparent;
+  }
 }
 @keyframes slidein-right {
   from {
@@ -68,7 +75,8 @@
     width: 100%;
     // opacity: 0;
     // max-height: 50px;
-    background-color: red;
+    background-color: #f9f0f0;
+
   }
 }
 
@@ -76,6 +84,12 @@
   animation: slidein-left 1s 2;
   animation-delay: 0.6s;
   animation-direction: alternate;
+  .left-arrow:after, .right-arrow:after {
+    border-color: transparent;
+  }
+  .left-arrow:before, .right-arrow:before {
+    border-color: transparent;
+  }
 }
 @keyframes slidein-left {
   from {
@@ -89,7 +103,7 @@
     width: 100%;
     // opacity: 0;
     // max-height: 50px;
-    background-color: red;
+    background-color: #f1eedc;
   }
 }
 
@@ -97,6 +111,7 @@
   animation: slidein-up 2s;
   animation-delay: 0.6s;
   animation-direction: alternate;
+
 }
 @keyframes slidein-up {
   0% {
@@ -104,13 +119,20 @@
     height: 100%;
     opacity: 1;
   }
+  10% {
+    opacity: 0.2;
+  }
 
   50% {
     margin-top:100vh;
     height: 100%;
-    // opacity: 0;
+    opacity: 0;
     // max-height: 50px;
-    background-color: red;
+    background-color: green;
+
+  }
+  90% {
+    opacity: 0.2;
   }
   100% {
     margin-top: 0;
