@@ -7,11 +7,8 @@
     <div class="entry-content">
       <?php the_content(); ?>
       <?php the_post_thumbnail();
-      $meta_id=  get_post_meta( get_the_ID(), 'demo-media', true );
-      $img_id = wp_get_attachment_metadata( $meta_id, $unfiltered );
-
-       ?>
-       <img src="<?php echo get_site_url(). '/wp-content/uploads/' .$img_id['file']; ?>">
+      $attachment_id=  get_post_meta( get_the_ID(), 'demo-media', true ); ?>
+      <img src="<?php echo wp_get_attachment_url( $attachment_id ); ?>">
     </div>
     <footer>
       <?php wp_link_pages(['before' => '<nav class="page-nav"><p>' . __('Pages:', 'sage'), 'after' => '</p></nav>']); ?>

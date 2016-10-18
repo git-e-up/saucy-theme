@@ -90,20 +90,45 @@ function slug_register_hot_posts() {
  * @return mixed
  */
 function slug_get_hot_posts( $object, $field_name, $request ) {
+    //get list of post IDs from fieldmanager
     $post_ids = get_post_meta( $object[ 'id' ], $field_name, true );
 
     // If no repeatables, bail
     if( !$post_ids )
       return json_encode( '' );
 
+    // $post_ids is two levels deep, we only care about the value at the
+    // second depth, let's flatten the array
+
+    // ex:
+    // array(
+    //  0 => array(
+    //     product_id => 2
+    //   )
+    //   1 => array(
+    //     product_id => 15
+    //   )
+    // )
+
     $tmpPosts = (object) array('posts' => array());
             array_walk_recursive($post_ids, create_function('&$v, $k, &$t', '$t->flatPosts[] = $v;'), $tmpPosts);
 
+    // becomes:
+    // $tmpPosts->flatPosts = array(2,15)
+    // $hot_posts_ids is a flattened array of just the post ids
     $hot_post_ids = $tmpPosts->flatPosts;
-
 
     $hot_posts = get_posts(array( 'post__in' => $hot_post_ids ) );
 
+    foreach( $hot_posts as $key => $value){
+      $post = $hot_posts[$key];
+
+      $url = wp_get_attachment_url( get_post_thumbnail_id($value->ID) );
+
+      $post->featured_image_url = $url;
+
+      $hot_posts[$key] = $post;
+    }
 
     return json_encode( $hot_posts );
 
