@@ -2,6 +2,8 @@
 * WordPress REST API (Version 2): https://wordpress.org/plugins/rest-api/
 * Fieldmanager: https://github.com/alleyinteractive/wordpress-fieldmanager/releases
 
+Below is the ReadMe info for Sage, the starter theme I typically use for WordPress themes
+
 # [Sage](https://roots.io/sage/)
 [![Build Status](https://travis-ci.org/roots/sage.svg)](https://travis-ci.org/roots/sage)
 [![devDependency Status](https://david-dm.org/roots/sage/dev-status.svg)](https://david-dm.org/roots/sage#info=devDependencies)
