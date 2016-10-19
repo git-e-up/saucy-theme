@@ -1,4 +1,4 @@
-## My Theme specific requirements
+## This theme's specific requirements
 * WordPress REST API (Version 2): https://wordpress.org/plugins/rest-api/
 * Fieldmanager: https://github.com/alleyinteractive/wordpress-fieldmanager/releases
 
