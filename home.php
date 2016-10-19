@@ -27,6 +27,6 @@ if ( $query->have_posts() ) :
 			<h1>Hi There</h1>
     </section>
 	<?php endwhile;
-
 endif;
 ?>
+<div class="modal-background"></div>
