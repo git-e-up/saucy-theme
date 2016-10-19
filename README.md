@@ -1,3 +1,7 @@
+## My Theme specific requirements
+* WordPress REST API (Version 2): https://wordpress.org/plugins/rest-api/
+* Fieldmanager: https://github.com/alleyinteractive/wordpress-fieldmanager/releases
+
 # [Sage](https://roots.io/sage/)
 [![Build Status](https://travis-ci.org/roots/sage.svg)](https://travis-ci.org/roots/sage)
 [![devDependency Status](https://david-dm.org/roots/sage/dev-status.svg)](https://david-dm.org/roots/sage#info=devDependencies)
