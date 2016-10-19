@@ -72,7 +72,7 @@
 
                   $.each(repeatables, function(index,el){
                     // console.log(el['post_name']);
-                    $('.info-container > ul').append( "<li><div class='popup-preview'><div class='thumbnail-container' style='background:url("+el.featured_image_url+") center center no-repeat; background-size:cover'></div><h4>" + el.post_title + "</h4></div><section class='popup'>"+el.post_content+"</section></li>");
+                    $('.info-container > ul').append( "<li><div class='popup-preview'><div class='thumbnail-container' style='background:url("+el.featured_image_url+") center center no-repeat; background-size:cover'></div><h4>" + el.post_title + "</h4></div><section class='popup'><span class='x-close'></span>"+el.post_content+"</section></li>");
                   });
                 }, 1500);
                 postCount++;

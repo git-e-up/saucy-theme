@@ -73,9 +73,9 @@
   to {
     margin-left: 100%;
     width: 100%;
-    // opacity: 0;
+    opacity: 0;
     // max-height: 50px;
-    background-color: #f9f0f0;
+    background-color: #f3f2ed;
 
   }
 }
@@ -101,9 +101,9 @@
   to {
     margin-left: -100%;
     width: 100%;
-    // opacity: 0;
+    opacity: 0;
     // max-height: 50px;
-    background-color: #f1eedc;
+    background-color: #f3f2ed;
   }
 }
 
@@ -121,6 +121,7 @@
   }
   10% {
     opacity: 0.2;
+    background-color: #f3f2ed;
   }
 
   50% {
@@ -128,11 +129,12 @@
     height: 100%;
     opacity: 0;
     // max-height: 50px;
-    background-color: green;
+    background-color: #f3f2ed;
 
   }
   90% {
     opacity: 0.2;
+    background-color: white;
   }
   100% {
     margin-top: 0;
