@@ -29,7 +29,7 @@
 
               //add bouncing on init load
               $('.side-nav li:first-of-type').addClass('bouncing');
-              // $('li').attr('data-postIndex', response.indexOf(el));
+
             });
           }
         });
@@ -42,8 +42,6 @@
           $('.side-nav li').removeClass('bouncing');
           $(this).addClass('bouncing');
           $('.info-container').removeClass('sliding-up, sliding-right');
-
-          // $('h2').addClass('bouncing');
           // console.log(postCount);
         });
 
@@ -68,7 +66,7 @@
 
 
                 setTimeout(function(){
-                  $('.info-container').html('<span class="left-arrow"></span><span class="right-arrow"></span><h2>'+response[0].title.rendered+'</h2><h4>' + response[0].content.rendered+ '</h4>'+ '<ul></ul>');
+                  $('.info-container').html('<span class="left-arrow"></span><span class="right-arrow"></span><h2>'+response[0].title.rendered+'</h2><div class="info-container-body">' + response[0].content.rendered+ '</div>'+ '<ul></ul>');
 
                   $.each(repeatables, function(index,el){
                     // console.log(el['post_name']);
@@ -134,7 +132,7 @@
                   $('.info-container').addClass('sliding-up');
 
                   setTimeout(function(){
-                    $('.info-container').html('<span class="left-arrow"></span><span class="right-arrow"></span><h2>'+el.title.rendered+'</h2><h4>' + el.content.rendered+ '</h4>' + '<ul></ul>');
+                    $('.info-container').html('<span class="left-arrow"></span><span class="right-arrow"></span><h2>'+el.title.rendered+'</h2><div class="info-container-body">' + el.content.rendered+ '</div>' + '<ul></ul>');
 
                     $.each(repeatables, function(index,el){
                       console.log(el);

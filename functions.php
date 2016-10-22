@@ -27,3 +27,14 @@ foreach ($sage_includes as $file) {
   require_once $filepath;
 }
 unset($file, $filepath);
+
+
+
+
+// add_action( 'init', 'setting_my_first_cookie' );
+//
+// function setting_my_first_cookie() {
+//   setcookie( '_wpnonce', wp_create_nonce('wp_json'), 30 * DAYS_IN_SECONDS, COOKIEPATH, COOKIE_DOMAIN );
+//
+//     setcookie( 'nonce', wp_create_nonce('wp_json'), 30 * DAYS_IN_SECONDS, COOKIEPATH, COOKIE_DOMAIN );
+// }

@@ -26,7 +26,9 @@ if ( $query->have_posts() ) :
 		<section class="col-xs-12 text-center info-container">
 			<h1>Hi There</h1>
     </section>
+
 	<?php endwhile;
 endif;
 ?>
+
 <div class="modal-background"></div>
