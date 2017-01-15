@@ -25,11 +25,8 @@
           success: function(response) {
             $.each(response,function(index, el){
 
-              $('.side-nav').append('<li data-slug="'+el.slug+'" data-postIndex="'+parseInt(response.indexOf(el)+2)+'">' + el.title.rendered + '</li>');
-
-              //add bouncing on init load
-              $('.side-nav li:first-of-type').addClass('bouncing');
-
+              $('.main-nav').append('<li data-slug="'+el.slug+'" data-postIndex="'+parseInt(response.indexOf(el)+2)+'">' + el.title.rendered + '</li>');
+              $('.init-header').fadeIn(1000);
             });
           }
         });
@@ -37,19 +34,19 @@
 
         var postCount=1;
 
-        $(document).on('click', '.side-nav li', function(){
+        $(document).on('click', '.main-nav li', function(){
           postCount = $(this).attr('data-postIndex');
-          $('.side-nav li').removeClass('bouncing');
+          $('.main-nav li').removeClass('bouncing');
           $(this).addClass('bouncing');
           $('.info-container').removeClass('sliding-up, sliding-right');
           // console.log(postCount);
         });
 
         function getNextPost(i){
-          // console.log(postCount);
 
-          $('.side-nav li').removeClass('bouncing');
-          $('.side-nav li:nth-of-type('+postCount+')').addClass('bouncing');
+
+          $('.main-nav li').removeClass('bouncing');
+          $('.main-nav li:nth-of-type('+postCount+')').addClass('bouncing');
           $.ajax({
             url: 'wp-json/wp/v2/hot_sauces?per_page=1&filter[orderby]=date&order=asc&page='+postCount,
             success: function(response) {
@@ -86,9 +83,14 @@
 
         // if .info-container exists (which will only happen after php puts it there), get the first post on initial load
         if( $('.info-container').length > 0){
+          setTimeout(function(){
             getNextPost(postCount);
 
             $('.info-container').attr('data-postIndex', '0').addClass('sliding-up');
+            //add bouncing on init load
+            $('.main-nav li:first-of-type').addClass('bouncing');
+          }, 2000)
+
         }
 
         $('.info-container').on('click', '.right-arrow', function(){
@@ -107,7 +109,7 @@
 
           if (postCount <= 0) {
 
-            postCount = $('.side-nav li').length;
+            postCount = $('.main-nav li').length;
           }
           getNextPost(postCount);
           // console.log(postCount);
@@ -116,7 +118,7 @@
           }, 3000);
         });
 
-        $(document).on('click', '.side-nav li', function(e){
+        $(document).on('click', '.main-nav li', function(e){
           var slug = $(this).data('slug');
           // console.log(postCount);
           $('.info-container').removeClass('sliding-right, sliding-up');
@@ -130,12 +132,12 @@
                   };
 
                   $('.info-container').addClass('sliding-up');
+                  $('.info-container').attr('data-slug', el.slug);
 
                   setTimeout(function(){
                     $('.info-container').html('<span class="left-arrow"></span><span class="right-arrow"></span><h2>'+el.title.rendered+'</h2><div class="info-container-body">' + el.content.rendered+ '</div>' + '<ul></ul>');
 
                     $.each(repeatables, function(index,el){
-                      console.log(el);
                       $('.info-container > ul').append( "<li><div class='popup-preview'><div class='thumbnail-container' style='background:url("+el.featured_image_url+") center center no-repeat; background-size:cover'></div><h4>" + el.post_title + "</h4></div><section class='popup'><span class='x-close'></span>"+el.post_content+"</section></li>")
                     });
 

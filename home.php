@@ -20,11 +20,11 @@ if ( $query->have_posts() ) :
 		$query->the_post();
     // only put that div there if there are posts
     ?>
-    <ul class="side-nav">
+    <ul class="main-nav">
 
     </ul>
 		<section class="col-xs-12 text-center info-container">
-			<h1>Hi There</h1>
+			<h1 class="init-header" style="display:none;">Hi There</h1>
     </section>
 
 	<?php endwhile;

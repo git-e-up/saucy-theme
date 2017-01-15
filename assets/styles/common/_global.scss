@@ -11,7 +11,7 @@ a {
   color: #000;
   border: 1px solid #000;
   padding: 5px 10px;
-
+  display: inline-block;
   background: linear-gradient(
      white 50%, #333 50%
   );
@@ -39,9 +39,7 @@ a {
   li {
     width: 45%;
     display: block;
-    &:hover{
-      cursor: pointer;
-    }
+
 
     @media(min-width: $screen-sm-min) {
       width: 30%;
@@ -58,8 +56,10 @@ a {
     }
     .popup-preview {
       padding: 5px;
+      cursor: pointer;
       &:hover{
         padding: 0;
+
       }
 
     }
@@ -157,6 +157,7 @@ a {
     border-bottom: 2px solid transparent;
     transform: rotate(45deg);
     box-shadow: 5px -4px 7px -2px #dc8585;
+    cursor: pointer;
     &:before {
       content: '';
       position: absolute;
@@ -191,7 +192,7 @@ a {
   }
 }
 
-.side-nav{
+.main-nav{
   padding-left: 0;
   li {
     border: 2px solid #000;
