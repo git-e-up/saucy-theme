@@ -1,5 +1,6 @@
 * {
-  font-family: 'Libre Franklin', sans-serif;
+  font-family: 'futura-pt', 'Libre Franklin', sans-serif;
+  font-weight: 700;
 }
 body {
   background: #f3f2ed;
@@ -138,7 +139,7 @@ a {
   margin: auto;
   z-index: 2;
   background-color: #607d8b;
-  color: #000;
+  color: #f3f2ed;
   padding: 20px;
   border: 2px solid red;
   box-shadow: 5px 5px 5px #dc8585;
@@ -209,12 +210,4 @@ a {
     margin-bottom: 10px;
     cursor: pointer;
   }
-}
-
-.tooltip > .tooltip-inner {
-  background-color: transparent;
-  color: #FFFFFF;
-  border: 1px solid black;
-  padding: 15px;
-  font-size: 20px;
 }
