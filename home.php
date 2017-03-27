@@ -1,8 +1,7 @@
-
-
+<?php get_template_part( 'templates/matthew' ); ?>
 
 <?php
-// $post_id = 7;
+
 
 $args = array(
 	'post_type' => 'hot_sauces',

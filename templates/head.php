@@ -4,6 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Libre+Franklin" rel="stylesheet">
   <link rel="shortcut icon" href="https://avatars3.githubusercontent.com/u/11341488?v=3&s=466" type="image/x-icon"/>
+  <meta property="og:image"              content="http://matthewlissner.com/wp-content/uploads/2016/08/me-300x296.jpg" />
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
