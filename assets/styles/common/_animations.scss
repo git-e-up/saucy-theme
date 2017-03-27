@@ -7,7 +7,7 @@
   cursor: pointer;
   path {
     fill-opacity: 0;
-    stroke: #607d8b;
+    stroke: $blue-steel;
     stroke-width: 2;
     stroke-dasharray: 870;
     stroke-dashoffset: 870;
@@ -19,7 +19,7 @@
     // background-color: black;
     path {
       fill-opacity: 0;
-      stroke: #607d8b;
+      stroke: $blue-steel;
       stroke-width: 2;
       stroke-dasharray: 870;
       stroke-dashoffset: 870;
@@ -32,14 +32,14 @@
 @keyframes drawSVG {
   to {
     stroke-dashoffset: 0;
-    fill: #607d8b;
+    fill: $blue-steel;
     fill-opacity: 1;
   }
 }
 @keyframes drawSVG2 {
   to {
     stroke-dashoffset: 0;
-    fill: #607d8b;
+    fill: $blue-steel;
     fill-opacity: 1;
   }
 }
@@ -48,7 +48,7 @@
   animation: bounce 1.2s;
   animation-delay: 0.6s;
   // animation-direction: alternate;
-  background-color: #607D8B;
+  background-color: $blue-steel;
   color: white;
 }
 
