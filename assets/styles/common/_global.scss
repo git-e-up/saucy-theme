@@ -210,3 +210,11 @@ a {
     cursor: pointer;
   }
 }
+
+.tooltip > .tooltip-inner {
+  background-color: transparent;
+  color: #FFFFFF;
+  border: 1px solid black;
+  padding: 15px;
+  font-size: 20px;
+}

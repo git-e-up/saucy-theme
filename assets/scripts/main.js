@@ -18,7 +18,7 @@
     // All pages
     'common': {
       init: function() {
-        // $('.side-nav li').addClass('bouncing');
+        $('[data-toggle="tooltip"]').tooltip();  
 
         $.ajax({
           url: 'wp-json/wp/v2/hot_sauces?filter[orderby]=date&order=asc',

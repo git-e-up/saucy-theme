@@ -4,6 +4,7 @@
   position: relative;
   display: block;
   margin: auto;
+  cursor: pointer;
   path {
     fill-opacity: 0;
     stroke: #607d8b;
@@ -13,9 +14,29 @@
     animation: drawSVG 3s 1 linear;
     animation-fill-mode: forwards;
   }
+  &:active {
+
+    // background-color: black;
+    path {
+      fill-opacity: 0;
+      stroke: #607d8b;
+      stroke-width: 2;
+      stroke-dasharray: 870;
+      stroke-dashoffset: 870;
+      animation: drawSVG2 8s 1 linear;
+      animation-fill-mode: forwards;
+    }
+  }
 }
 
 @keyframes drawSVG {
+  to {
+    stroke-dashoffset: 0;
+    fill: #607d8b;
+    fill-opacity: 1;
+  }
+}
+@keyframes drawSVG2 {
   to {
     stroke-dashoffset: 0;
     fill: #607d8b;
