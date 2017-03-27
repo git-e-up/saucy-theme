@@ -8,6 +8,9 @@ body {
 .main {
   padding: 30px 0;
 }
+$off-white: rgb(243, 242, 237);
+
+
 a {
   color: #000;
   border: 1px solid #000;
@@ -28,7 +31,7 @@ a {
   border: 4px double #000;
   box-shadow: 3px 3px 5px #888888;
   background-color: #607d8b;
-  color: rgb(243, 242, 237);
+  color: $off-white;
 
 
   ul {
@@ -86,7 +89,7 @@ a {
     position: absolute;
     pointer-events: none;
     border-color: rgba(194, 225, 245, 0);
-  	border-left-color: rgb(243, 242, 237);
+  	border-left-color: $off-white;
     border-right-color: #607d8b;
   	border-width: 20px;
   	margin-top: -20px;
@@ -118,7 +121,7 @@ a {
 
   &:before{
     border-right-color: #607d8b;
-    border-left-color: rgb(243, 242, 237);
+    border-left-color: $off-white;
   }
   &:after{
     border-left-color: #607d8b;
@@ -141,43 +144,86 @@ a {
   background-color: #607d8b;
   color: #f3f2ed;
   padding: 20px;
-  border: 2px solid red;
-  box-shadow: 5px 5px 5px #dc8585;
+   transition: color 0.25s;
+  // border: 2px solid red;
+  // box-shadow: 5px 5px 5px #dc8585;
   @media(min-width: $screen-sm-min) {
     width: 60%;
   }
-  .x-close {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    top: -15px;
-    right: -15px;
-    border-radius: 50%;
-    background: #607d8b;
-    border: 2px solid red;
-    border-bottom: 2px solid transparent;
-    transform: rotate(45deg);
-    box-shadow: 5px -4px 7px -2px #dc8585;
-    cursor: pointer;
-    &:before {
-      content: '';
-      position: absolute;
-      height: 100%;
-      width: 2px;
-      background-color: black;
-      // transform: rotate(45deg);
-    }
-    &:after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      top: 50%;
-      left: 0;
-      background-color: black;
-      // transform: rotate(-45deg);
-    }
+
+  &:before, &:after {
+   box-sizing: border-box;
+   content: '';
+   position: absolute;
+   z-index: -1;
+   width: 100%;
+   height: 100%;
+   border: 2px solid transparent; // Set border to invisible, so we don't see a 4px border on a 0x0 element before the transition starts
+    width: 0;
+    height: 0;
   }
+  &:before {
+    top: 0;
+    left: 0;
+  }
+  &:after {
+    bottom: 0;
+    right: 0;
+  }
+
+  &:hover::before,
+  &:hover::after {
+    width: 100%;
+    height: 100%;
+  }
+  &:hover::before {
+  border-top-color: $off-white; // Make borders visible
+  border-right-color: $off-white;
+  transition:
+    width 0.25s ease-out, // Width expands first
+    height 0.25s ease-out 0.25s; // And then height
+  }
+  &:hover::after {
+  border-bottom-color: $off-white; // Make borders visible
+  border-left-color: $off-white;
+  transition:
+    border-color 0s ease-out 0.5s, // Wait for ::before to finish before showing border
+    width 0.25s ease-out 0.5s, // And then exanding width
+    height 0.25s ease-out 0.75s; // And finally height
+  }
+
+  // .x-close {
+  //   position: absolute;
+  //   width: 30px;
+  //   height: 30px;
+  //   top: -15px;
+  //   right: -15px;
+  //   border-radius: 50%;
+  //   background: #607d8b;
+  //   border: 2px solid red;
+  //   border-bottom: 2px solid transparent;
+  //   transform: rotate(45deg);
+  //   box-shadow: 5px -4px 7px -2px #dc8585;
+  //   cursor: pointer;
+  //   &:before {
+  //     content: '';
+  //     position: absolute;
+  //     height: 100%;
+  //     width: 2px;
+  //     background-color: black;
+  //     // transform: rotate(45deg);
+  //   }
+  //   &:after {
+  //     content: '';
+  //     position: absolute;
+  //     width: 100%;
+  //     height: 2px;
+  //     top: 50%;
+  //     left: 0;
+  //     background-color: black;
+  //     // transform: rotate(-45deg);
+  //   }
+  // }
 }
 .modal-background {
   // display: none;
