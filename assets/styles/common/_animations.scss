@@ -1,3 +1,44 @@
+#matt-img {
+  max-width: 95%;
+  max-height: 95%;
+  height: 95%;
+  position: relative;
+  display: block;
+  margin: auto;
+  cursor: pointer;
+  path {
+    // fill-opacity: 0;
+    stroke: $blue-steel;
+    stroke-width: 20;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: drawMatt 3s 1 linear;
+    animation-fill-mode: forwards;
+  }
+  &:active {
+
+    path {
+      animation: drawMatt2 4s 1 ease;
+      animation-fill-mode: forwards;
+    }
+  }
+}
+
+@keyframes drawMatt {
+  to {
+    stroke-dashoffset: 0;
+    fill: $blue-steel;
+    fill-opacity: 1;
+  }
+}
+@keyframes drawMatt2 {
+  to {
+    stroke-dashoffset: 0;
+    fill: $blue-steel;
+    fill-opacity: 1;
+  }
+}
+
 #matthew-svg {
   max-width: 95%;
   max-height: 95%;
