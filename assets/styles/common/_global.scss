@@ -155,7 +155,7 @@ a {
   margin: auto;
   z-index: 2;
   background-color: $blue-steel;
-  color: rgba(243, 242, 237, 0.85);
+  color: $off-white;
   padding: 20px;
   transition: color 0.25s;
 
@@ -183,9 +183,9 @@ a {
     bottom: 0;
     right: 0;
   }
-  &:hover{
-    color: rgba(243, 242, 237, 1);
-  }
+  // &:hover{
+  //   color: rgba(243, 242, 237, 1);
+  // }
 
   &:before,
   &:after {
