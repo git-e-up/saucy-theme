@@ -28,6 +28,13 @@ a {
   }
 }
 
+.svgs {
+  position: relative;
+  text-align: left;
+  @media(min-width: $screen-sm-min){
+      text-align: center;
+  }
+}
 .info-container {
   border: 4px double #000;
   box-shadow: 3px 3px 5px #888888;

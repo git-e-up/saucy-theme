@@ -1,5 +1,7 @@
-<?php get_template_part( 'templates/new', 'photo' ); ?>
-<?php get_template_part( 'templates/matthew' ); ?>
+<section class="svgs">
+	<?php get_template_part( 'templates/matthew' ); ?>
+	<?php get_template_part( 'templates/new', 'photo' ); ?>
+</section>
 
 <?php
 
