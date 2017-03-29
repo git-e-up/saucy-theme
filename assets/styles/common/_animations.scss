@@ -4,22 +4,19 @@
   top: 0;
   right: 0;
   display: inline-block;
-  // align-self: flex-end;
-  // max-height: 95%;
   height: 100%;
   max-width: 30%;
   @media(min-width: $screen-sm-min){
       max-width: 15%;
   }
-  // margin: auto;
   cursor: pointer;
   path {
     // fill-opacity: 0;
     stroke: $blue-steel;
     stroke-width: 20;
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: drawMatt 3s 1 linear;
+    stroke-dasharray: 8000;
+    stroke-dashoffset: 8000;
+    animation: drawMatt 4s 1 linear;
     animation-fill-mode: forwards;
   }
   &:active {
