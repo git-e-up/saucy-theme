@@ -11,7 +11,6 @@
   }
   cursor: pointer;
   path {
-    // fill-opacity: 0;
     stroke: $blue-steel;
     stroke-width: 20;
     stroke-dasharray: 8000;
@@ -48,7 +47,6 @@
   max-height: 95%;
   position: relative;
   display: inline-block;
-  // margin: auto;
   cursor: pointer;
   @media(min-width: $screen-sm-min) {
       max-width: 40%;
@@ -87,7 +85,7 @@
   }
 }
 
-.bouncing {
+.main-nav__item--bouncing {
   animation: bounce 1.2s;
   animation-delay: 0.6s;
   // animation-direction: alternate;

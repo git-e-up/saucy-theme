@@ -18,14 +18,14 @@
     // All pages
     'common': {
       init: function() {
-        
+
 
         $.ajax({
           url: 'wp-json/wp/v2/hot_sauces?filter[orderby]=date&order=asc',
           success: function(response) {
             $.each(response,function(index, el){
 
-              $('.main-nav').append('<li data-slug="'+el.slug+'" data-postIndex="'+parseInt(response.indexOf(el)+2)+'">' + el.title.rendered + '</li>');
+              $('.main-nav').append('<li class="main-nav__item" data-slug="'+el.slug+'" data-postIndex="'+parseInt(response.indexOf(el)+2)+'">' + el.title.rendered + '</li>');
               $('.init-header').fadeIn(1000);
             });
           }
@@ -34,19 +34,18 @@
 
         var postCount=1;
 
-        $(document).on('click', '.main-nav li', function(){
+        $(document).on('click', '.main-nav__item', function(){
           postCount = $(this).attr('data-postIndex');
-          $('.main-nav li').removeClass('bouncing');
-          $(this).addClass('bouncing');
+          $('.main-nav__item').removeClass('main-nav__item--bouncing');
+          $(this).addClass('main-nav__item--bouncing');
           $('.info-container').removeClass('sliding-up, sliding-right');
           // console.log(postCount);
         });
 
         function getNextPost(i){
 
-
-          $('.main-nav li').removeClass('bouncing');
-          $('.main-nav li:nth-of-type('+postCount+')').addClass('bouncing');
+          $('.main-nav__item').removeClass('main-nav__item--bouncing');
+          $('.main-nav__item:nth-of-type('+postCount+')').addClass('main-nav__item--bouncing');
           $.ajax({
             url: 'wp-json/wp/v2/hot_sauces?per_page=1&filter[orderby]=date&order=asc&page='+postCount,
             success: function(response) {
@@ -54,20 +53,17 @@
               if(response.length === 1){
                 if( JSON.parse( response[0].repeatable_autocomplete ) ){
                     var repeatables = JSON.parse( response[0].repeatable_autocomplete );
-                    // console.log(repeatables);
                 };
 
                 $('.info-container').attr('data-slug', response[0].slug);
 
-                // console.log(response[0].slug);
-
 
                 setTimeout(function(){
-                  $('.info-container').html('<span class="left-arrow"></span><span class="right-arrow"></span><h2>'+response[0].title.rendered+'</h2><div class="info-container-body">' + response[0].content.rendered+ '</div>'+ '<ul></ul>');
+                  $('.info-container').html('<span class="left-arrow"></span><span class="right-arrow"></span><h2>'+response[0].title.rendered+'</h2><div class="info-container-body">' + response[0].content.rendered+ '</div>'+ '<ul class="info__list"></ul>');
 
                   $.each(repeatables, function(index,el){
                     // console.log(el['post_name']);
-                    $('.info-container > ul').append( "<li><div class='popup-preview'><div class='thumbnail-container' style='background:url("+el.featured_image_url+") center center no-repeat; background-size:cover'></div><h4>" + el.post_title + "</h4></div><section class='popup'><span class='x-close'></span>"+el.post_content+"</section></li>");
+                    $('.info__list').append( "<li class='info__list__item'><div class='info__popup__preview'><div class='thumbnail-container' style='background:url("+el.featured_image_url+") center center no-repeat; background-size:cover'></div><h4>" + el.post_title + "</h4></div><section class='popup'><span class='x-close'></span>"+el.post_content+"</section></li>");
                   });
                 }, 1500);
                 postCount++;
@@ -87,8 +83,8 @@
             getNextPost(postCount);
 
             $('.info-container').attr('data-postIndex', '0').addClass('sliding-up');
-            //add bouncing on init load
-            $('.main-nav li:first-of-type').addClass('bouncing');
+            //add main-nav__item--bouncing on init load
+            $('.main-nav__item:first-of-type').addClass('main-nav__item--bouncing');
           }, 2000)
 
         }
@@ -109,18 +105,18 @@
 
           if (postCount <= 0) {
 
-            postCount = $('.main-nav li').length;
+            postCount = $('.main-nav__item').length;
           }
           getNextPost(postCount);
-          // console.log(postCount);
+
           setTimeout(function(){
             $('.info-container').removeClass('sliding-left');
           }, 3000);
         });
 
-        $(document).on('click', '.main-nav li', function(e){
+        $(document).on('click', '.main-nav__item', function(e){
           var slug = $(this).data('slug');
-          // console.log(postCount);
+
           $('.info-container').removeClass('sliding-right, sliding-up');
           $.ajax({
             url: 'wp-json/wp/v2/hot_sauces',
@@ -135,10 +131,10 @@
                   $('.info-container').attr('data-slug', el.slug);
 
                   setTimeout(function(){
-                    $('.info-container').html('<span class="left-arrow"></span><span class="right-arrow"></span><h2>'+el.title.rendered+'</h2><div class="info-container-body">' + el.content.rendered+ '</div>' + '<ul></ul>');
+                    $('.info-container').html('<span class="left-arrow"></span><span class="right-arrow"></span><h2>'+el.title.rendered+'</h2><div class="info-container-body">' + el.content.rendered+ '</div>' + '<ul class="info__list"></ul>');
 
                     $.each(repeatables, function(index,el){
-                      $('.info-container > ul').append( "<li><div class='popup-preview'><div class='thumbnail-container' style='background:url("+el.featured_image_url+") center center no-repeat; background-size:cover'></div><h4>" + el.post_title + "</h4></div><section class='popup'><span class='x-close'></span>"+el.post_content+"</section></li>")
+                      $('.info__list').append( "<li class='info__list__item'><div class='info__popup__preview'><div class='thumbnail-container' style='background:url("+el.featured_image_url+") center center no-repeat; background-size:cover'></div><h4>" + el.post_title + "</h4></div><section class='popup'><span class='x-close'></span>"+el.post_content+"</section></li>")
                     });
 
 
@@ -149,7 +145,7 @@
           });
         });
 
-        $('body').on('click', '.popup-preview', function() {
+        $('body').on('click', '.info__popup__preview', function() {
           $(this).siblings('.popup').addClass('show-popup');
           $('.modal-background').addClass('modal-background-open');
         });
