@@ -150,11 +150,13 @@
         $('body').on('click', '.info__popup__preview', function() {
           $(this).siblings('.info__popup').addClass('info--show-popup');
           $('.modal-background').addClass('modal-background--open');
+          $('body').css('overflow', 'hidden');
         });
 
         $('.modal-background').click(function(){
           $(this).removeClass('modal-background--open');
           $('.info__popup').removeClass('info--show-popup');
+          $('body').css('overflow', 'auto');
         });
 
         $('body').on('click', '.x-close', function(){
