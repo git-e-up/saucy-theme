@@ -38,7 +38,7 @@
           postCount = $(this).attr('data-postIndex');
           $('.main-nav__item').removeClass('main-nav__item--bouncing');
           $(this).addClass('main-nav__item--bouncing');
-          $('.info-container').removeClass('sliding-up, sliding-right');
+          $('.info').removeClass('info--sliding-up, info--sliding-right');
           // console.log(postCount);
         });
 
@@ -55,15 +55,15 @@
                     var repeatables = JSON.parse( response[0].repeatable_autocomplete );
                 };
 
-                $('.info-container').attr('data-slug', response[0].slug);
+                $('.info').attr('data-slug', response[0].slug);
 
 
                 setTimeout(function(){
-                  $('.info-container').html('<span class="left-arrow"></span><span class="right-arrow"></span><h2>'+response[0].title.rendered+'</h2><div class="info-container-body">' + response[0].content.rendered+ '</div>'+ '<ul class="info__list"></ul>');
+                  $('.info').html('<span class="info__left-arrow"></span><span class="info__right-arrow"></span><h2>'+response[0].title.rendered+'</h2><div class="info__body">' + response[0].content.rendered+ '</div>'+ '<ul class="info__list"></ul>');
 
                   $.each(repeatables, function(index,el){
                     // console.log(el['post_name']);
-                    $('.info__list').append( "<li class='info__list__item'><div class='info__popup__preview'><div class='thumbnail-container' style='background:url("+el.featured_image_url+") center center no-repeat; background-size:cover'></div><h4>" + el.post_title + "</h4></div><section class='popup'><span class='x-close'></span>"+el.post_content+"</section></li>");
+                    $('.info__list').append( "<li class='info__list__item'><div class='info__popup__preview'><div class='thumbnail-container' style='background:url("+el.featured_image_url+") center center no-repeat; background-size:cover'></div><h4>" + el.post_title + "</h4></div><section class='info__popup'><span class='x-close'></span>"+el.post_content+"</section></li>");
                   });
                 }, 1500);
                 postCount++;
@@ -77,29 +77,29 @@
 
 
 
-        // if .info-container exists (which will only happen after php puts it there), get the first post on initial load
-        if( $('.info-container').length > 0){
+        // if .info exists (which will only happen after php puts it there), get the first post on initial load
+        if( $('.info').length > 0){
           setTimeout(function(){
             getNextPost(postCount);
 
-            $('.info-container').attr('data-postIndex', '0').addClass('sliding-up');
+            $('.info').attr('data-postIndex', '0').addClass('info--sliding-up');
             //add main-nav__item--bouncing on init load
             $('.main-nav__item:first-of-type').addClass('main-nav__item--bouncing');
           }, 2000)
 
         }
 
-        $('.info-container').on('click', '.right-arrow', function(){
-          $('.info-container').addClass('sliding-right').removeClass('sliding-left, sliding-up');
+        $('.info').on('click', '.info__right-arrow', function(){
+          $('.info').addClass('info--sliding-right').removeClass('info--sliding-left, info--sliding-up');
           getNextPost(postCount);
-          // console.log(postCount);
+
           setTimeout(function(){
-            $('.info-container').removeClass('sliding-right');
+            $('.info').removeClass('info--sliding-right');
           }, 3000);
         });
 
-        $('.info-container').on('click', '.left-arrow', function(){
-          $('.info-container').addClass('sliding-left').removeClass('sliding-right, sliding-up');
+        $('.info').on('click', '.info__left-arrow', function(){
+          $('.info').addClass('info--sliding-left').removeClass('info--sliding-right, info--sliding-up');
           postCount = postCount-1;
           postCount--;
 
@@ -110,14 +110,14 @@
           getNextPost(postCount);
 
           setTimeout(function(){
-            $('.info-container').removeClass('sliding-left');
+            $('.info').removeClass('info--sliding-left');
           }, 3000);
         });
 
         $(document).on('click', '.main-nav__item', function(e){
           var slug = $(this).data('slug');
 
-          $('.info-container').removeClass('sliding-right, sliding-up');
+          $('.info').removeClass('info--sliding-right, info--sliding-up');
           $.ajax({
             url: 'wp-json/wp/v2/hot_sauces',
             success: function(response) {
@@ -127,14 +127,14 @@
                       var repeatables = JSON.parse( el.repeatable_autocomplete )
                   };
 
-                  $('.info-container').addClass('sliding-up');
-                  $('.info-container').attr('data-slug', el.slug);
+                  $('.info').addClass('info--sliding-up');
+                  $('.info').attr('data-slug', el.slug);
 
                   setTimeout(function(){
-                    $('.info-container').html('<span class="left-arrow"></span><span class="right-arrow"></span><h2>'+el.title.rendered+'</h2><div class="info-container-body">' + el.content.rendered+ '</div>' + '<ul class="info__list"></ul>');
+                    $('.info').html('<span class="info__left-arrow"></span><span class="info__right-arrow"></span><h2>'+el.title.rendered+'</h2><div class="info__body">' + el.content.rendered+ '</div>' + '<ul class="info__list"></ul>');
 
                     $.each(repeatables, function(index,el){
-                      $('.info__list').append( "<li class='info__list__item'><div class='info__popup__preview'><div class='thumbnail-container' style='background:url("+el.featured_image_url+") center center no-repeat; background-size:cover'></div><h4>" + el.post_title + "</h4></div><section class='popup'><span class='x-close'></span>"+el.post_content+"</section></li>")
+                      $('.info__list').append( "<li class='info__list__item'><div class='info__popup__preview'><div class='thumbnail-container' style='background:url("+el.featured_image_url+") center center no-repeat; background-size:cover'></div><h4>" + el.post_title + "</h4></div><section class='info__popup'><span class='x-close'></span>"+el.post_content+"</section></li>")
                     });
 
 
@@ -146,18 +146,18 @@
         });
 
         $('body').on('click', '.info__popup__preview', function() {
-          $(this).siblings('.popup').addClass('show-popup');
-          $('.modal-background').addClass('modal-background-open');
+          $(this).siblings('.info__popup').addClass('info--show-popup');
+          $('.modal-background').addClass('modal-background--open');
         });
 
         $('.modal-background').click(function(){
-          $(this).removeClass('modal-background-open');
-          $('.popup').removeClass('show-popup');
+          $(this).removeClass('modal-background--open');
+          $('.info__popup').removeClass('info--show-popup');
         });
 
         $('body').on('click', '.x-close', function(){
-          $('.modal-background').removeClass('modal-background-open');
-          $('.popup').removeClass('show-popup');
+          $('.modal-background').removeClass('modal-background--open');
+          $('.info__popup').removeClass('info--show-popup');
         });
 
       },

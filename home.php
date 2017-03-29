@@ -25,7 +25,7 @@ if ( $query->have_posts() ) :
     <ul class="main-nav">
 
     </ul>
-		<section class="col-xs-12 text-center info-container">
+		<section class="col-xs-12 text-center info">
 			<h1 class="init-header" style="display:none;">Hi There</h1>
     </section>
 

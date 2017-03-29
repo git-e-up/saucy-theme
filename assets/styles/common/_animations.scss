@@ -88,7 +88,6 @@
 .main-nav__item--bouncing {
   animation: bounce 1.2s;
   animation-delay: 0.6s;
-  // animation-direction: alternate;
   background-color: $blue-steel;
   color: white;
 }
@@ -124,14 +123,14 @@
 }
 
 
-.sliding-right {
+.info--sliding-right {
   animation: slidein-right 1s 2;
   animation-delay: 0.6s;
   animation-direction: alternate;
-  .left-arrow:after, .right-arrow:after {
+  .info__left-arrow--sliding:after, .info__right-arrow:after {
     border-color: transparent;
   }
-  .left-arrow:before, .right-arrow:before {
+  .info__left-arrow:before, .info__right-arrow:before {
     border-color: transparent;
   }
 }
@@ -152,14 +151,16 @@
   }
 }
 
-.sliding-left {
+
+
+.info--sliding-left {
   animation: slidein-left 1s 2;
   animation-delay: 0.6s;
   animation-direction: alternate;
-  .left-arrow:after, .right-arrow:after {
+  .info__left-arrow--sliding:after, .info__right-arrow:after {
     border-color: transparent;
   }
-  .left-arrow:before, .right-arrow:before {
+  .info__left-arrow:before, .info__right-arrow:before {
     border-color: transparent;
   }
 }
@@ -179,7 +180,9 @@
   }
 }
 
-.sliding-up {
+
+
+.info--sliding-up {
   animation: slidein-up 2s;
   animation-delay: 0.6s;
   animation-direction: alternate;
@@ -200,9 +203,7 @@
     margin-top:100vh;
     height: 100%;
     opacity: 0;
-    // max-height: 50px;
     background-color: #f3f2ed;
-
   }
   90% {
     opacity: 0.2;

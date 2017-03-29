@@ -34,7 +34,7 @@ a {
       text-align: center;
   }
 }
-.info-container {
+.info {
   border: 2px solid #000;
   box-shadow: 3px 3px 5px #888888;
   background-color: $blue-steel;
@@ -74,7 +74,7 @@ a {
   }
 }
 
-.right-arrow {
+.info__right-arrow {
   position: absolute;
   right: 5px;
   top: 10px;
@@ -116,8 +116,8 @@ a {
 
 }
 
-.left-arrow {
-  @extend .right-arrow;
+.info__left-arrow {
+  @extend .info__right-arrow;
   position: absolute;
   left: 5px;
   top: 10px;
@@ -133,7 +133,7 @@ a {
   }
 }
 
-.popup {
+.info__popup {
   height: 0;
   width: 0;
   overflow: hidden;
@@ -146,7 +146,7 @@ a {
   }
 }
 
-.show-popup {
+.info--show-popup {
   display: block;
   position: fixed;
   top: 100px;
@@ -180,9 +180,6 @@ a {
     bottom: 0;
     right: 0;
   }
-  // &:hover{
-  //   color: rgba(243, 242, 237, 1);
-  // }
 
   &:before,
   &:after {
@@ -205,18 +202,18 @@ a {
       height 0.25s ease-out 0.75s; // And finally height
   }
 }
-.modal-background {
 
-  &-open{
-    top: 0;
-    left:0;
-    right:0;
-    height: 100vh;
-    width: 100vw;
-    position: fixed;
-    background-color: rgba(0,0,0,0.8);
-  }
+
+.modal-background--open{
+  top: 0;
+  left:0;
+  right:0;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  background-color: rgba(0,0,0,0.8);
 }
+
 
 .main-nav{
   margin-top: 25px;
