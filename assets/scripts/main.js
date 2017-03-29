@@ -39,7 +39,7 @@
           $('.main-nav__item').removeClass('main-nav__item--bouncing');
           $(this).addClass('main-nav__item--bouncing');
           $('.info').removeClass('info--sliding-up, info--sliding-right');
-          // console.log(postCount);
+                    $('.info__left-arrow, .info__right-arrow').addClass('arrow--sliding');
         });
 
         function getNextPost(i){
@@ -91,6 +91,7 @@
 
         $('.info').on('click', '.info__right-arrow', function(){
           $('.info').addClass('info--sliding-right').removeClass('info--sliding-left, info--sliding-up');
+          $('.info__left-arrow, .info__right-arrow').addClass('arrow--sliding');
           getNextPost(postCount);
 
           setTimeout(function(){
@@ -100,6 +101,7 @@
 
         $('.info').on('click', '.info__left-arrow', function(){
           $('.info').addClass('info--sliding-left').removeClass('info--sliding-right, info--sliding-up');
+          $('.info__left-arrow, .info__right-arrow').addClass('arrow--sliding');
           postCount = postCount-1;
           postCount--;
 
