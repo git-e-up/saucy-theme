@@ -71,6 +71,11 @@
                 postCount=1;
                 getNextPost(postCount);
               }
+            },
+            error: function(){
+              postCount=1;
+              console.log("YEAH, I KNOW THERE'S A CONSOLE ERROR HERE. IT'S COOL.");
+              getNextPost(postCount);
             }
           });
         }
