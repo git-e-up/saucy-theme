@@ -97,6 +97,11 @@
         $('.info').on('click', '.info__right-arrow', function(){
           $('.info').addClass('info--sliding-right').removeClass('info--sliding-left, info--sliding-up');
           $('.info__left-arrow, .info__right-arrow').addClass('arrow--sliding');
+          var totalPosts = $('.main-nav__item').length;
+          if (postCount > totalPosts){
+            postCount = 1;
+          }
+          
           getNextPost(postCount);
 
           setTimeout(function(){
