@@ -101,7 +101,7 @@
           if (postCount > totalPosts){
             postCount = 1;
           }
-          
+
           getNextPost(postCount);
 
           setTimeout(function(){

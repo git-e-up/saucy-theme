@@ -134,3 +134,26 @@ function slug_get_hot_posts( $object, $field_name, $request ) {
 
 
 }
+
+add_action( 'rest_api_init', __NAMESPACE__ . '\\register_svgs' );
+function register_svgs() {
+  $svgs = array('matthew', 'name');
+  foreach ($svgs as $svg){
+    register_rest_route( 'wp/v2/svgs',
+        $svg,
+        array(
+          'methods' => 'GET',
+          'callback' => __NAMESPACE__ . '\\my_awesome_svg_' . $svg,
+        )
+    );
+  }
+}
+function my_awesome_svg_matthew(){
+  get_template_part( 'templates/matthew' );
+  exit;
+}
+function my_awesome_svg_name(){
+  get_template_part( 'templates/new', 'photo' );
+  exit;
+}
+  // get_template_part( 'templates/new', 'photo' );
