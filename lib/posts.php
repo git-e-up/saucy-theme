@@ -137,6 +137,8 @@ function slug_get_hot_posts( $object, $field_name, $request ) {
 
 add_action( 'rest_api_init', __NAMESPACE__ . '\\register_svgs' );
 function register_svgs() {
+  header( 'Access-Control-Allow-Origin: *' );
+  header( 'Access-Control-Allow-Methods: GET' );
   $svgs = array('matthew', 'name');
   foreach ($svgs as $svg){
     register_rest_route( 'wp/v2/svgs',
